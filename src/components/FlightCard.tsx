@@ -1,15 +1,33 @@
 import type { FC } from 'react'
-import type { Race } from '../shared/types/race.interface'
+import { useSearchParams } from 'react-router-dom'
+import type { IFlight } from '../shared/types/race.interface'
 import './FlightCard.css'
 
 interface CardProp {
-	race: Race
+	race: IFlight
+	openDetails: () => void
+	updateQueryParam: (key: string, value: string) => void
 }
 
-const FlightCard: FC<CardProp> = ({ race }) => {
+const FlightCard: FC<CardProp> = ({ race, openDetails, updateQueryParam }) => {
+	const [searchParams] = useSearchParams()
+	const flight = searchParams.get('flight')
+
+	function clickCard() {
+		updateQueryParam('flight', race.airline)
+		openDetails()
+	}
+
 	return (
-		<div className='border-gradient w-[364px] p-[2px] mb-3 rounded-2xl'>
-			<div className='bg-gray-900 w-full h-[180px] rounded-2xl text-white p-6 mx-auto'>
+		<div
+			className={`w-[364px] p-[2px] mb-3 rounded-2xl ${
+				flight === race.airline ? 'border-gradient' : ''
+			}`}
+		>
+			<div
+				className='bg-gray-900 w-full h-[180px] rounded-2xl text-white p-6 mx-auto cursor-pointer'
+				onClick={clickCard}
+			>
 				<div className='flex justify-between items-center mb-8'>
 					<div className='flex items-center'>
 						<img
@@ -17,22 +35,22 @@ const FlightCard: FC<CardProp> = ({ race }) => {
 							src={race.logo}
 							alt={race.airline}
 						/>
-						<p>{race.flightNumber}</p>
+						<p>{race.airline}</p>
 					</div>
 					<div className='flex items-center'>
 						<div className='bg-white/10 px-2 py-1 rounded-2xl mr-2'>
 							{race.bookingNumber}
 						</div>
 						<div className='bg-white/10 px-2 py-1 rounded-2xl'>
-							{race.aircraft}
+							{race.aircraftReg}
 						</div>
 					</div>
 				</div>
 
 				<div className='flex items-center justify-between'>
 					<div className='text-center'>
-						<p>{race.departure.city}</p>
-						<p className='font-bold text-2xl'>{race.departure.code}</p>
+						<p>{race.from.city}</p>
+						<p className='font-bold text-2xl'>{race.from.code}</p>
 					</div>
 					<div className='flex-1 mx-5 relative'>
 						<div className='border-gradient h-0.5 rounded-full'></div>
@@ -41,10 +59,8 @@ const FlightCard: FC<CardProp> = ({ race }) => {
 						</div>
 					</div>
 					<div className='text-center'>
-						<p>{race.arrival.city}</p>
-						<p className='font-bold text-2xl tracking-wider'>
-							{race.arrival.code}
-						</p>
+						<p>{race.to.city}</p>
+						<p className='font-bold text-2xl tracking-wider'>{race.to.code}</p>
 					</div>
 				</div>
 			</div>

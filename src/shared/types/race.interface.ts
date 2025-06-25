@@ -1,18 +1,29 @@
-export interface Flight {
-	code: string
-	city: string
-	time: string
+export interface IFlightAirplane {
+	image: string
+	name: string
 }
 
-export interface Race {
-	flightNumber: string
+export interface IFlightRoute {
+	speed: number
+	altitude: number
+}
+
+export interface IFlightLocation {
+	city: string
+	country: string
+	countryCode: string
+	timezone: string
+	code: string
+}
+
+export interface IFlight {
+	airplane: IFlightAirplane
 	bookingNumber: string
+	route: IFlightRoute
 	logo: string
+	colorGradient: [string, string]
 	airline: string
-	departure: Flight
-	arrival: Flight
-	aircraft: string
-	status: 'Scheduled' | 'In Air' | 'Delayed' | 'On Time' | 'Boarding'
-	distance: string
-	duration: string
+	aircraftReg: string
+	from: IFlightLocation
+	to: IFlightLocation
 }
