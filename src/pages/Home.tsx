@@ -11,6 +11,8 @@ const Home: FC = () => {
 
 	function closeDetails() {
 		setIsShowDetails(false)
+		searchParams.delete('flight')
+		setSearchParams(searchParams)
 	}
 
 	function openDetails() {
@@ -23,7 +25,7 @@ const Home: FC = () => {
 	}
 
 	return (
-		<div className='flex items-center justify-between'>
+		<div className='flex items-start justify-between'>
 			<div>
 				{races.map(race => (
 					<FlightCard
