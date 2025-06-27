@@ -34,7 +34,7 @@ const FlightDetails: FC<Props> = ({ closeDetails }) => {
 						exit={{ opacity: 0, x: '-100%' }}
 						transition={{ duration: 0.3, ease: 'easeInOut' }}
 					>
-						<div className='bg-gray-900 dark:bg-white rounded-2xl text-white dark:text-black w-110 overflow-hidden'>
+						<div className='bg-gray-900 dark:bg-gray-200 rounded-2xl text-white dark:text-black w-110 overflow-hidden'>
 							<div
 								className='h-70 flex flex-col items-center justify-between'
 								style={gradientStyle}
@@ -61,9 +61,9 @@ const FlightDetails: FC<Props> = ({ closeDetails }) => {
 							{/* Body */}
 							<div className='p-3'>
 								{/*  Part 1 */}
-								<div className='bg-gray-800 dark:bg-blue-100 rounded-xl'>
+								<div className='bg-gray-800 dark:bg-white rounded-xl'>
 									<div className='grid grid-cols-2 relative'>
-										<div className='absolute rounded-full bg-gray-900 dark:bg-white left-[46%] top-[30%] w-10 h-10'>
+										<div className='absolute rounded-full bg-gray-900 dark:bg-gray-200 left-[46%] top-[30%] w-10 h-10'>
 											<Plane
 												size={28}
 												color='#f0a840'
@@ -72,14 +72,14 @@ const FlightDetails: FC<Props> = ({ closeDetails }) => {
 												className='absolute top-1.5 left-1.5'
 											/>
 										</div>
-										<div className='pb-2 border-r-2 border-b-4 border-gray-900 dark:border-white flex flex-col items-center'>
+										<div className='pb-2 border-r-2 border-b-4 border-gray-900 dark:border-gray-200 flex flex-col items-center'>
 											<p className='text-3xl tracking-wide mb-1 pt-4'>
 												{race.from.code}
 											</p>
 											<p>{race.from.country}</p>
 											<p className='text-gray-400 mt-1'>{race.from.timezone}</p>
 										</div>
-										<div className='pb-2 border-l-2 border-b-4 border-gray-900 dark:border-white flex flex-col items-center'>
+										<div className='pb-2 border-l-2 border-b-4 border-gray-900 dark:border-gray-200 flex flex-col items-center'>
 											<p className='text-3xl tracking-wide mb-1 pt-4'>
 												{race.to.code}
 											</p>
@@ -87,7 +87,7 @@ const FlightDetails: FC<Props> = ({ closeDetails }) => {
 											<p className='text-gray-400 mt-1'>{race.to.timezone}</p>
 										</div>
 									</div>
-									<div className='py-4 px-3 border-b-4 border-gray-900 dark:border-white relative'>
+									<div className='py-4 px-3 border-b-4 border-gray-900 dark:border-gray-200 relative'>
 										<GradientProgress progress={50} />
 										<div className='flex items-center justify-between'>
 											<div className='mt-3 text-gray-400'>2 715 km • 3h 1m</div>
@@ -95,21 +95,21 @@ const FlightDetails: FC<Props> = ({ closeDetails }) => {
 										</div>
 									</div>
 									<div className='grid grid-cols-2'>
-										<div className='p-3 flex items-center justify-between border-r-2 border-b-4 border-gray-900 dark:border-white'>
+										<div className='p-3 flex items-center justify-between border-r-2 border-b-4 border-gray-900 dark:border-gray-200'>
 											<p className='text-gray-400'>Scheduled</p>
 											<p>{race.schedule.departure.scheduled}</p>
 										</div>
-										<div className='p-3 flex items-center justify-between border-l-2 border-b-4 border-gray-900 dark:border-white'>
+										<div className='p-3 flex items-center justify-between border-l-2 border-b-4 border-gray-900 dark:border-gray-200'>
 											<p className='text-gray-400'>Actual</p>
 											<p>{race.schedule.departure.actual}</p>
 										</div>
 									</div>
 									<div className='grid grid-cols-2'>
-										<div className='p-3 flex items-center justify-between border-r-2 border-gray-900 dark:border-white'>
+										<div className='p-3 flex items-center justify-between border-r-2 border-gray-900 dark:border-gray-200'>
 											<p className='text-gray-400'>Scheduled</p>
 											<p>{race.schedule.arrival.scheduled}</p>
 										</div>
-										<div className='p-3 flex items-center justify-between border-l-2 border-gray-900 dark:border-white'>
+										<div className='p-3 flex items-center justify-between border-l-2 border-gray-900 dark:border-gray-200'>
 											<p className='text-gray-400'>Actual</p>
 											<p>{race.schedule.arrival.actual}</p>
 										</div>
@@ -117,15 +117,15 @@ const FlightDetails: FC<Props> = ({ closeDetails }) => {
 								</div>
 
 								{/* Part 2 */}
-								<div className='bg-gray-800 dark:bg-blue-100 rounded-xl mt-3'>
-									<div className='p-2 pl-3 border-b-4 border-gray-900 bg-gray-700 dark:bg-blue-200 rounded-t-xl dark:border-white'>
+								<div className='bg-gray-800 dark:bg-white rounded-xl mt-3'>
+									<div className='p-2 pl-3 border-b-4 border-gray-900 bg-gray-700 dark:bg-gray-300 rounded-t-xl dark:border-gray-200'>
 										Flight information
 									</div>
 									<div className='grid grid-cols-2'>
-										<div className='p-3 border-r-2 border-b-4 border-gray-900 dark:border-white'>
+										<div className='p-3 border-r-2 border-b-4 border-gray-900 dark:bg-white dark:border-gray-200'>
 											{race.airplane.name}
 										</div>
-										<div className='p-3 border-l-2 border-b-4 border-gray-900 dark:border-white flex items-center gap-2'>
+										<div className='p-3 border-l-2 border-b-4 border-gray-900 dark:bg-white dark:border-gray-200 flex items-center gap-2'>
 											<img
 												src={race.flightInfo.flagUrl}
 												className='w-5 h-5'
@@ -135,11 +135,11 @@ const FlightDetails: FC<Props> = ({ closeDetails }) => {
 										</div>
 									</div>
 									<div className='grid grid-cols-2'>
-										<div className='p-3 border-r-2 border-gray-900 dark:border-white flex items-center justify-between'>
+										<div className='p-3 border-r-2 border-gray-900  dark:border-gray-200 flex items-center justify-between'>
 											<p className='text-gray-400'>Speed</p>
 											<p>{race.route.speed} km/h</p>
 										</div>
-										<div className='p-3 border-l-2 border-gray-900 dark:border-white flex items-center justify-between'>
+										<div className='p-3 border-l-2 border-gray-900  dark:border-gray-200 flex items-center justify-between'>
 											<p className='text-gray-400'>Altitube</p>
 											<p>{race.route.altitude} m</p>
 										</div>
@@ -147,26 +147,26 @@ const FlightDetails: FC<Props> = ({ closeDetails }) => {
 								</div>
 
 								{/* Part 3 */}
-								<div className='rounded-xl bg-gray-800 dark:bg-blue-100 mt-3 grid grid-cols-4'>
-									<div className='border-r-2 border-gray-900 dark:border-white p-3'>
+								<div className='rounded-xl bg-gray-800 dark:bg-white mt-3 grid grid-cols-4'>
+									<div className='border-r-2 border-gray-900 dark:border-gray-200 p-3'>
 										<button className='flex flex-col gap-2 items-center justify-center mx-auto cursor-pointer'>
 											<Route />
 											<p>Route</p>
 										</button>
 									</div>
-									<div className='border-l-2 border-r-2 border-gray-900 dark:border-white p-3'>
+									<div className='border-l-2 border-r-2 border-gray-900 dark:border-gray-200 p-3'>
 										<button className='flex flex-col gap-2 items-center justify-center mx-auto cursor-pointer'>
 											<Target />
 											<p>Follow</p>
 										</button>
 									</div>
-									<div className='border-l-2 border-r-2 border-gray-900 dark:border-white p-3'>
+									<div className='border-l-2 border-r-2 border-gray-900 dark:border-gray-200 p-3'>
 										<button className='flex flex-col gap-2 items-center justify-center mx-auto cursor-pointer'>
 											<Share2 />
 											<p>Share</p>
 										</button>
 									</div>
-									<div className='border-l-2 border-gray-900 dark:border-white p-3'>
+									<div className='border-l-2 border-gray-900 dark:border-gray-200 p-3'>
 										<button className='flex flex-col gap-2 items-center justify-center mx-auto cursor-pointer'>
 											<Ellipsis />
 											<p>More</p>
