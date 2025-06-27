@@ -25,7 +25,7 @@ const FlightCard: FC<CardProp> = ({ race, openDetails, updateQueryParam }) => {
 			}`}
 		>
 			<div
-				className='bg-gray-900 w-full h-[180px] rounded-2xl text-white p-6 mx-auto cursor-pointer'
+				className='bg-gray-900 dark:bg-white w-full h-[180px] rounded-2xl text-white dark:text-gray-950 p-6 mx-auto cursor-pointer'
 				onClick={clickCard}
 			>
 				<div className='flex justify-between items-center mb-8'>
