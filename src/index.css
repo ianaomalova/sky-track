@@ -22,3 +22,7 @@ body {
 	--color-accent-red: #ef4444;
 	--font-custom: 'JetBrains Mono', monospace;
 }
+
+.border-gradient {
+	background: linear-gradient(90deg, #ef4444, #f0a840);
+}

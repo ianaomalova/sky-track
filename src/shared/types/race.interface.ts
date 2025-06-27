@@ -6,6 +6,8 @@ export interface IFlightAirplane {
 export interface IFlightRoute {
 	speed: number
 	altitude: number
+	distance: number
+	duration: string
 }
 
 export interface IFlightLocation {
@@ -14,6 +16,22 @@ export interface IFlightLocation {
 	countryCode: string
 	timezone: string
 	code: string
+}
+
+export interface ISchedule {
+	departure: {
+		scheduled: string
+		actual: string
+	}
+	arrival: {
+		scheduled: string
+		actual: string
+	}
+}
+
+export interface IFlightInfo {
+	country: string
+	flagUrl: string
 }
 
 export interface IFlight {
@@ -26,4 +44,6 @@ export interface IFlight {
 	aircraftReg: string
 	from: IFlightLocation
 	to: IFlightLocation
+	schedule: ISchedule
+	flightInfo: IFlightInfo
 }

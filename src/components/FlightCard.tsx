@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { IFlight } from '../shared/types/race.interface'
-import './FlightCard.css'
+import GradientProgress from './ui/GradientProgress'
 
 interface CardProp {
 	race: IFlight
@@ -53,10 +53,7 @@ const FlightCard: FC<CardProp> = ({ race, openDetails, updateQueryParam }) => {
 						<p className='font-bold text-2xl'>{race.from.code}</p>
 					</div>
 					<div className='flex-1 mx-5 relative'>
-						<div className='border-gradient h-0.5 rounded-full'></div>
-						<div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center text-white text-3xl'>
-							<span className='w-10 h-10'>✈</span>
-						</div>
+						<GradientProgress progress={75} />
 					</div>
 					<div className='text-center'>
 						<p>{race.to.city}</p>

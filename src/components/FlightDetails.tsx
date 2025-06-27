@@ -1,9 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { Ellipsis, Route, Share2, Target, X } from 'lucide-react'
+import { Ellipsis, Plane, Route, Share2, Target, X } from 'lucide-react'
 import { type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { races } from '../races'
-import './FlightCard.css'
+import GradientProgress from './ui/GradientProgress'
 
 interface Props {
 	closeDetails: () => void
@@ -36,7 +36,7 @@ const FlightDetails: FC<Props> = ({ closeDetails }) => {
 					>
 						<div className='bg-gray-900 rounded-2xl text-white w-110 overflow-hidden'>
 							<div
-								className='h-65 flex flex-col items-center justify-between'
+								className='h-70 flex flex-col items-center justify-between'
 								style={gradientStyle}
 							>
 								<div className='mt-5 p-7 bg-gray-900 rounded-xl h-20 w-100 flex items-center justify-between'>
@@ -64,10 +64,12 @@ const FlightDetails: FC<Props> = ({ closeDetails }) => {
 								<div className='bg-gray-800 rounded-xl'>
 									<div className='grid grid-cols-2 relative'>
 										<div className='absolute rounded-full bg-gray-900 left-[46%] top-[30%] w-10 h-10'>
-											<img
-												className='w-6 h-6 absolute top-2 left-2'
-												src='plane-icon.svg'
-												alt=''
+											<Plane
+												size={28}
+												color='#f0a840'
+												strokeWidth={1.75}
+												absoluteStrokeWidth
+												className='absolute top-1.5 left-1.5'
 											/>
 										</div>
 										<div className='pb-2 border-r-2 border-b-4 border-gray-900 flex flex-col items-center'>
@@ -86,63 +88,60 @@ const FlightDetails: FC<Props> = ({ closeDetails }) => {
 										</div>
 									</div>
 									<div className='py-4 px-3 border-b-4 border-gray-900 relative'>
-										<div className='border-gradient h-0.5 rounded-full'></div>
-										<div className='absolute top-4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center text-white text-3xl'>
-											<span className='w-10 h-10'>✈</span>
-										</div>
+										<GradientProgress progress={50} />
 										<div className='flex items-center justify-between'>
-											<div className='mt-3 text-gray-400'>2 715 km . 3h 1m</div>
-											<div className='mt-3 text-gray-400'>882 km . 59m</div>
+											<div className='mt-3 text-gray-400'>2 715 km • 3h 1m</div>
+											<div className='mt-3 text-gray-400'>882 km • 59m</div>
 										</div>
 									</div>
 									<div className='grid grid-cols-2'>
 										<div className='p-3 flex items-center justify-between border-r-2 border-b-4 border-gray-900'>
 											<p className='text-gray-400'>Scheduled</p>
-											<p>08:15</p>
+											<p>{race.schedule.departure.scheduled}</p>
 										</div>
 										<div className='p-3 flex items-center justify-between border-l-2 border-b-4 border-gray-900'>
 											<p className='text-gray-400'>Actual</p>
-											<p>08:24</p>
+											<p>{race.schedule.departure.actual}</p>
 										</div>
 									</div>
 									<div className='grid grid-cols-2'>
 										<div className='p-3 flex items-center justify-between border-r-2 border-gray-900'>
 											<p className='text-gray-400'>Scheduled</p>
-											<p>08:15</p>
+											<p>{race.schedule.arrival.scheduled}</p>
 										</div>
 										<div className='p-3 flex items-center justify-between border-l-2 border-gray-900'>
 											<p className='text-gray-400'>Actual</p>
-											<p>08:24</p>
+											<p>{race.schedule.arrival.actual}</p>
 										</div>
 									</div>
 								</div>
 
 								{/* Part 2 */}
 								<div className='bg-gray-800 rounded-xl mt-3'>
-									<div className='p-2 border-b-4 border-gray-900 bg-gray-700 rounded-t-xl'>
+									<div className='p-2 pl-3 border-b-4 border-gray-900 bg-gray-700 rounded-t-xl'>
 										Flight information
 									</div>
 									<div className='grid grid-cols-2'>
 										<div className='p-3 border-r-2 border-b-4 border-gray-900'>
-											Boing 737-800
+											{race.airplane.name}
 										</div>
 										<div className='p-3 border-l-2 border-b-4 border-gray-900 flex items-center gap-2'>
 											<img
-												src='/flags/ireland-flag.svg'
+												src={race.flightInfo.flagUrl}
 												className='w-5 h-5'
 												alt=''
 											/>
-											Ireland
+											{race.flightInfo.country}
 										</div>
 									</div>
 									<div className='grid grid-cols-2'>
 										<div className='p-3 border-r-2 border-gray-900 flex items-center justify-between'>
 											<p className='text-gray-400'>Speed</p>
-											<p>870 km/h</p>
+											<p>{race.route.speed} km/h</p>
 										</div>
 										<div className='p-3 border-l-2 border-gray-900 flex items-center justify-between'>
 											<p className='text-gray-400'>Altitube</p>
-											<p>11 300 m</p>
+											<p>{race.route.altitude} m</p>
 										</div>
 									</div>
 								</div>
