@@ -14,9 +14,11 @@ const FlightDetails: FC<Props> = ({ closeDetails }) => {
 	const flight = searchParams.get('flight')
 	const race = races.find(item => item.airline === flight)
 
-	const gradientStyle = {
-		backgroundImage: `linear-gradient(to bottom, ${race?.colorGradient[0]}, ${race?.colorGradient[1]}`,
-	}
+	const gradientStyle = race
+		? {
+				backgroundImage: `linear-gradient(to bottom, ${race.colorGradient[0]}, ${race.colorGradient[1]})`,
+		  }
+		: {}
 
 	return (
 		<motion.div
@@ -35,6 +37,7 @@ const FlightDetails: FC<Props> = ({ closeDetails }) => {
 						transition={{ duration: 0.3, ease: 'easeInOut' }}
 					>
 						<div className='bg-gray-900 dark:bg-gray-200 rounded-2xl text-white dark:text-black w-110 overflow-hidden'>
+							{/* Header */}
 							<div
 								className='h-70 flex flex-col items-center justify-between'
 								style={gradientStyle}
@@ -140,7 +143,7 @@ const FlightDetails: FC<Props> = ({ closeDetails }) => {
 											<p>{race.route.speed} km/h</p>
 										</div>
 										<div className='p-3 border-l-2 border-gray-900  dark:border-gray-200 flex items-center justify-between'>
-											<p className='text-gray-400'>Altitube</p>
+											<p className='text-gray-400'>Altitude</p>
 											<p>{race.route.altitude} m</p>
 										</div>
 									</div>
