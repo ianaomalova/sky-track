@@ -20,7 +20,8 @@
       "@components/*": ["components/*"],
       "@services/*": ["services/*"],
       "@pages/*": ["pages/*"],
-      "@ui/*": ["components/ui/*"]
+      "@ui/*": ["components/ui/*"],
+      "@constants/*": ["constants/*"]
     },
 
     /* Linting */

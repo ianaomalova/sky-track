@@ -1,9 +1,10 @@
 import { AnimatePresence } from 'framer-motion'
 import { useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import FlightCard from '@components/FlightCard/FlightCard'
+import FlightCard from '@components/FlightCard'
 import { races } from '../races'
-import FlightDetails from '@components/FlightDetails/FlightDetails'
+import FlightDetails from '@components/FlightDetails'
+import { QUERY_PARAM_FLIGHT } from '@constants/flight.constants'
 
 const Home: FC = () => {
   const [isShowDetails, setIsShowDetails] = useState(true)
@@ -11,7 +12,7 @@ const Home: FC = () => {
 
   function closeDetails() {
     setIsShowDetails(false)
-    searchParams.delete('flight')
+    searchParams.delete(QUERY_PARAM_FLIGHT)
     setSearchParams(searchParams)
   }
 
@@ -19,8 +20,8 @@ const Home: FC = () => {
     setIsShowDetails(true)
   }
 
-  function updateQueryParam(key: string, value: string) {
-    searchParams.set(key, value)
+  function updateQueryParam(value: string) {
+    searchParams.set(QUERY_PARAM_FLIGHT, value)
     setSearchParams(searchParams)
   }
 

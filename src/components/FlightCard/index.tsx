@@ -1,12 +1,12 @@
+import GradientProgress from '@ui/GradientProgress'
 import type { FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import GradientProgress from '@ui/GradientProgress'
 import type { IFlight } from 'types/race.interface'
 
 interface CardProp {
   race: IFlight
   openDetails: () => void
-  updateQueryParam: (key: string, value: string) => void
+  updateQueryParam: (value: string) => void
 }
 
 const FlightCard: FC<CardProp> = ({ race, openDetails, updateQueryParam }) => {
@@ -14,7 +14,7 @@ const FlightCard: FC<CardProp> = ({ race, openDetails, updateQueryParam }) => {
   const flight = searchParams.get('flight')
 
   function clickCard() {
-    updateQueryParam('flight', race.airline)
+    updateQueryParam(race.airline)
     openDetails()
   }
 
