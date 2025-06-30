@@ -20,7 +20,7 @@ const FlightCard: FC<CardProp> = ({ race, openDetails, updateQueryParam }) => {
 
   return (
     <div
-      className={`mb-3 w-[364px] rounded-2xl p-[2px] ${
+      className={`mb-3 w-[380px] rounded-2xl p-[2px] ${
         flight === race.airline ? 'border-gradient' : ''
       }`}
     >

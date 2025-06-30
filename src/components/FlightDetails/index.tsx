@@ -33,7 +33,7 @@ const FlightDetails: FC<Props> = ({ closeDetails }) => {
             exit={{ opacity: 0, x: '-100%' }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
           >
-            <div className="w-110 overflow-hidden rounded-2xl bg-gray-900 text-white dark:bg-gray-200 dark:text-black">
+            <div className="w-100 overflow-hidden rounded-2xl bg-gray-900 text-white dark:bg-gray-200 dark:text-black">
               {/* Header start */}
               <Header closeDetails={closeDetails} race={race} />
               {/* Header end */}
