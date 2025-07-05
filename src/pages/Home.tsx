@@ -7,6 +7,7 @@ import { AnimatePresence } from 'framer-motion'
 import { useEffect, useState, type FC } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { useSearchParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { races } from '../races'
 
 const Home: FC = () => {
@@ -46,11 +47,23 @@ const Home: FC = () => {
 
   const toggleFavorites = (id: string) => {
     setFavorites((prev) => {
+      const isAdding = !prev.includes(id)
       const updated = prev.includes(id)
         ? prev.filter((el) => el !== id)
         : [...prev, id]
       try {
         localStorage.setItem('favorites', JSON.stringify(updated))
+        setTimeout(() => {
+          toast.success(
+            isAdding
+              ? 'Рейс успешно добавлен в избранное!'
+              : 'Рейс успешно удален из избранного!',
+            {
+              position: 'top-right',
+              autoClose: 2000,
+            },
+          )
+        }, 0)
       } catch (e) {
         console.error('Ошибка сохранения в local storage', e)
       }

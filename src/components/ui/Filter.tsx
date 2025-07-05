@@ -1,21 +1,8 @@
 import type { FC } from 'react'
 
-const style = {
-  width: '100%',
-  maxWidth: '380px',
-  padding: '12px 20px',
-  background: 'linear-gradient(135deg, #253858 0%, #171e2d 100%)',
-  border: '2px solid rgba(160, 174, 192, 0.2)',
-  borderRadius: '12px',
-  color: '#ffffff',
-  fontSize: '16px',
-  fontFamily: 'inherit',
-  outline: 'none',
-  transition: 'all 0.3s ease',
-  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
-  marginBottom: '20px',
-}
-
+const input =
+  'mb-3 w-full max-w-sm rounded-xl border-2 border-blue-400/40 bg-slate-800 px-5 py-3 text-white placeholder-blue-200 transition-all duration-300 outline-none hover:border-blue-300/60 focus:border-blue-200/80 ' +
+  'dark:border-indigo-400/40 dark:bg-indigo-50 dark:text-black dark:placeholder-indigo-500 dark:hover:border-indigo-300/60 dark:focus:border-indigo-200/80'
 interface Props {
   value: string
   onChange: (value: string) => void
@@ -28,8 +15,8 @@ const Filter: FC<Props> = ({ value, onChange }) => {
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder="Search by country or city"
-      style={style}
-    />
+      className={`${input}`}
+    ></input>
   )
 }
 export default Filter
