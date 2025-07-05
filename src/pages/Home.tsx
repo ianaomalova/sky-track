@@ -10,7 +10,7 @@ import { useSearchParams } from 'react-router-dom'
 import { races } from '../races'
 
 const Home: FC = () => {
-  const [isShowDetails, setIsShowDetails] = useState(true)
+  const [isShowDetails, setIsShowDetails] = useState(false)
   const [filter, setFilter] = useState('')
   const [searchParams, setSearchParams] = useSearchParams()
   const isMobile = useMediaQuery({ query: '(max-width: 992px)' })

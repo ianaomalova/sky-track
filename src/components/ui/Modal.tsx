@@ -16,14 +16,7 @@ export const Modal: FC<Props> = ({ children, isOpen }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <motion.div
-            className="mx-4 w-full max-w-md rounded-lg bg-white p-6"
-            initial={{ scale: 0.7 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0.7 }}
-          >
-            {children}
-          </motion.div>
+          {children}
         </motion.div>
       )}
     </>
