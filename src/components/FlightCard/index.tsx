@@ -2,6 +2,7 @@ import GradientProgress from '@ui/GradientProgress'
 import { Heart } from 'lucide-react'
 import { useEffect, useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import type { IFlight } from 'types/race.interface'
 
 interface CardProp {
@@ -26,9 +27,21 @@ const FlightCard: FC<CardProp> = ({ race, openDetails, updateQueryParam }) => {
   }
 
   function toggleFavorites(id: string) {
-    setFavorites((prev) =>
-      prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id],
-    )
+    setFavorites((prev) => {
+      if (prev.includes(id)) {
+        toast.success('Рейс успешно удален из избранного!', {
+          position: 'top-right',
+          autoClose: 2000,
+        })
+        return prev.filter((fav) => fav !== id)
+      } else {
+        toast.success('Рейс успешно добавлен в избранное!', {
+          position: 'top-right',
+          autoClose: 2000,
+        })
+        return [...prev, id]
+      }
+    })
   }
 
   useEffect(() => {
@@ -64,9 +77,12 @@ const FlightCard: FC<CardProp> = ({ race, openDetails, updateQueryParam }) => {
               {race.aircraftReg}
             </div>
             <Heart
-              className={isFavorite ? 'text-red-500' : 'text-gray-400'}
+              className={`hover:scale-130 ${isFavorite ? 'text-red-500' : 'text-gray-400'}`}
               fill={isFavorite ? 'currentColor' : 'none'}
-              onClick={() => toggleFavorites(race.airline)}
+              onClick={(e) => {
+                e.stopPropagation()
+                toggleFavorites(race.airline)
+              }}
             />
           </div>
         </div>
