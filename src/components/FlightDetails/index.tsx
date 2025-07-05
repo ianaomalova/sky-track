@@ -10,12 +10,31 @@ import { Header } from './Header'
 
 interface Props {
   closeDetails: () => void
+  isMobile?: boolean
 }
 
-const FlightDetails: FC<Props> = ({ closeDetails }) => {
+const FlightDetails: FC<Props> = ({ closeDetails, isMobile }) => {
   const [searchParams] = useSearchParams()
   const flight = searchParams.get('flight')
   const race = races.find((item) => item.airline === flight)
+
+  if (isMobile) {
+    return (
+      race && (
+        <div className="w-100 overflow-hidden rounded-2xl bg-gray-900 text-white dark:bg-gray-200 dark:text-black">
+          <Header closeDetails={closeDetails} race={race} />
+          <div className="p-3">
+            <div className="rounded-xl bg-gray-800 dark:bg-white">
+              <FlightRoute race={race} />
+              <FlightSchedule race={race} />
+            </div>
+            <FlightInfo race={race} />
+            <Actions />
+          </div>
+        </div>
+      )
+    )
+  }
 
   return (
     <motion.div

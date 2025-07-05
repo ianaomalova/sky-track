@@ -3,7 +3,7 @@ import FlightDetails from '@components/FlightDetails'
 import Filter from '@components/ui/Filter'
 import { Modal } from '@components/ui/Modal'
 import { QUERY_PARAM_FLIGHT } from '@constants/flight.constants'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import { useState, type FC } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { useSearchParams } from 'react-router-dom'
@@ -56,17 +56,11 @@ const Home: FC = () => {
           {isShowDetails && (
             <>
               {isMobile ? (
-                <Modal isOpen={isShowDetails}>
-                  <FlightDetails closeDetails={closeDetails} />
+                <Modal isOpen={isShowDetails} onClose={closeDetails}>
+                  <FlightDetails closeDetails={closeDetails} isMobile />
                 </Modal>
               ) : (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  <FlightDetails closeDetails={closeDetails} />
-                </motion.div>
+                <FlightDetails closeDetails={closeDetails} />
               )}
             </>
           )}
