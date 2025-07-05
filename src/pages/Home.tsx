@@ -4,13 +4,14 @@ import Filter from '@components/ui/Filter'
 import { Modal } from '@components/ui/Modal'
 import { QUERY_PARAM_FLIGHT } from '@constants/flight.constants'
 import { AnimatePresence } from 'framer-motion'
-import { useState, type FC } from 'react'
+import { useEffect, useState, type FC } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { useSearchParams } from 'react-router-dom'
 import { races } from '../races'
 
 const Home: FC = () => {
   const [isShowDetails, setIsShowDetails] = useState(false)
+  const [favorites, setFavorites] = useState<string[]>([])
   const [filter, setFilter] = useState('')
   const [searchParams, setSearchParams] = useSearchParams()
   const isMobile = useMediaQuery({ query: '(max-width: 992px)' })
@@ -28,6 +29,34 @@ const Home: FC = () => {
   function updateQueryParam(value: string) {
     searchParams.set(QUERY_PARAM_FLIGHT, value)
     setSearchParams(searchParams)
+  }
+
+  useEffect(() => {
+    const store = localStorage.getItem('favorites')
+    if (store) {
+      try {
+        const parsed = JSON.parse(store)
+        setFavorites(Array.isArray(parsed) ? parsed : [])
+      } catch (e) {
+        console.error('Cannot parsed local storage', e)
+        setFavorites([])
+      }
+    }
+  }, [])
+
+  const toggleFavorites = (id: string) => {
+    setFavorites((prev) => {
+      const updated = prev.includes(id)
+        ? prev.filter((el) => el !== id)
+        : [...prev, id]
+      try {
+        localStorage.setItem('favorites', JSON.stringify(updated))
+      } catch (e) {
+        console.error('Ошибка сохранения в local storage', e)
+      }
+
+      return updated
+    })
   }
 
   const filteredRaces = races.filter((race) => {
@@ -48,6 +77,8 @@ const Home: FC = () => {
               race={race}
               openDetails={openDetails}
               updateQueryParam={updateQueryParam}
+              toggleFavorite={toggleFavorites}
+              favorites={favorites}
             />
           ))}
         </div>

@@ -18,7 +18,7 @@ const Favorites: FC = () => {
         <div className="mt-10 text-center text-gray-400">No favorites yet</div>
       ) : (
         favoriteRaces.map((race) => (
-          <FlightCard key={race.airline} race={race} />
+          <FlightCard key={race.airline} race={race} favorites={favoriteIds} />
         ))
       )}
     </div>

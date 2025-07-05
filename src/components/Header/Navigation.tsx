@@ -16,7 +16,7 @@ const Navigation: FC = () => {
       <ul className="flex items-center gap-5">
         {NAV_CONFIG.map((link) => {
           return (
-            <li>
+            <li key={link.to}>
               <NavLink
                 className={({ isActive }) =>
                   ` ${navCommon} ${isActive ? `${active}` : `${inActive}`}`

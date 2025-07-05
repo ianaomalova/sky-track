@@ -1,23 +1,26 @@
 import GradientProgress from '@ui/GradientProgress'
 import { Heart } from 'lucide-react'
-import { useEffect, useState, type FC } from 'react'
+import { type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import type { IFlight } from 'types/race.interface'
 
 interface CardProp {
   race: IFlight
   openDetails?: () => void
   updateQueryParam?: (value: string) => void
+  favorites?: string[]
+  toggleFavorite?: (id: string) => void
 }
 
-const FlightCard: FC<CardProp> = ({ race, openDetails, updateQueryParam }) => {
+const FlightCard: FC<CardProp> = ({
+  race,
+  openDetails,
+  updateQueryParam,
+  favorites,
+  toggleFavorite,
+}) => {
   const [searchParams] = useSearchParams()
   const flight = searchParams.get('flight')
-  const [favorites, setFavorites] = useState<string[]>(() => {
-    const stored = localStorage.getItem('favorites')
-    return stored ? JSON.parse(stored) : []
-  })
 
   function clickCard() {
     if (openDetails && updateQueryParam) {
@@ -26,29 +29,7 @@ const FlightCard: FC<CardProp> = ({ race, openDetails, updateQueryParam }) => {
     }
   }
 
-  function toggleFavorites(id: string) {
-    setFavorites((prev) => {
-      if (prev.includes(id)) {
-        toast.success('Рейс успешно удален из избранного!', {
-          position: 'top-right',
-          autoClose: 2000,
-        })
-        return prev.filter((fav) => fav !== id)
-      } else {
-        toast.success('Рейс успешно добавлен в избранное!', {
-          position: 'top-right',
-          autoClose: 2000,
-        })
-        return [...prev, id]
-      }
-    })
-  }
-
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites))
-  }, [favorites])
-
-  const isFavorite = favorites.includes(race.airline)
+  const isFavorite = favorites?.includes(race.airline)
 
   return (
     <div
@@ -81,7 +62,7 @@ const FlightCard: FC<CardProp> = ({ race, openDetails, updateQueryParam }) => {
               fill={isFavorite ? 'currentColor' : 'none'}
               onClick={(e) => {
                 e.stopPropagation()
-                toggleFavorites(race.airline)
+                toggleFavorite?.(race.airline)
               }}
             />
           </div>
