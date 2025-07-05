@@ -1,15 +1,17 @@
 import FlightCard from '@components/FlightCard'
 import FlightDetails from '@components/FlightDetails'
+import Filter from '@components/ui/Filter'
+import { Modal } from '@components/ui/Modal'
 import { QUERY_PARAM_FLIGHT } from '@constants/flight.constants'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState, type FC } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { useSearchParams } from 'react-router-dom'
 import { races } from '../races'
-import { Modal } from '@components/ui/Modal'
 
 const Home: FC = () => {
   const [isShowDetails, setIsShowDetails] = useState(true)
+  const [filter, setFilter] = useState('')
   const [searchParams, setSearchParams] = useSearchParams()
   const isMobile = useMediaQuery({ query: '(max-width: 992px)' })
 
@@ -28,11 +30,19 @@ const Home: FC = () => {
     setSearchParams(searchParams)
   }
 
+  const filteredRaces = races.filter((race) => {
+    return (
+      race.flightInfo.country.toLowerCase().includes(filter.toLowerCase()) ||
+      race.from.city.toLowerCase().includes(filter.toLowerCase())
+    )
+  })
+
   return (
     <>
       <div className="flex items-start justify-between px-5 pt-5 md:justify-center">
         <div>
-          {races.map((race) => (
+          <Filter value={filter} onChange={setFilter} />
+          {filteredRaces.map((race) => (
             <FlightCard
               key={race.aircraftReg}
               race={race}
