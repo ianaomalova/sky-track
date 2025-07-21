@@ -4,17 +4,25 @@ import { MapComponent } from '@components/Map'
 import Filter from '@components/ui/Filter'
 import { Modal } from '@components/ui/Modal'
 import { QUERY_PARAM_FLIGHT } from '@constants/flight.constants'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { fetchFlights, selectFlights } from '@store/slices/flightSlice'
 import { AnimatePresence } from 'framer-motion'
-import { useState, type FC } from 'react'
+import { useEffect, useState, type FC } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { useSearchParams } from 'react-router-dom'
-import { races } from '../races'
 
 const Home: FC = () => {
+  const dispatch = useAppDispatch()
+  const races = useAppSelector(selectFlights)
+
   const [isShowDetails, setIsShowDetails] = useState(false)
   const [filter, setFilter] = useState('')
   const [searchParams, setSearchParams] = useSearchParams()
   const isMobile = useMediaQuery({ query: '(max-width: 992px)' })
+
+  useEffect(() => {
+    dispatch(fetchFlights())
+  }, [dispatch])
 
   function closeDetails() {
     setIsShowDetails(false)

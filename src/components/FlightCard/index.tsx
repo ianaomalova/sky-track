@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import type { IFlight } from 'types/race.interface'
 import { toast } from 'react-toastify'
-import { toggleFavorite } from '@store/slices/favoritesSlice'
+import { toggleFavorite } from '@store/slices/flightSlice'
 
 interface CardProp {
   race: IFlight
@@ -14,7 +14,7 @@ interface CardProp {
 }
 
 const FlightCard: FC<CardProp> = ({ race, openDetails, updateQueryParam }) => {
-  const favorites = useAppSelector((state) => state.favorites.favoriteFlights)
+  const favorites = useAppSelector((state) => state.flights.favoriteFlights)
   const dispatch = useAppDispatch()
 
   const [searchParams] = useSearchParams()

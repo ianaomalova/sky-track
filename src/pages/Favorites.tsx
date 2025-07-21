@@ -1,14 +1,14 @@
 import FlightCard from '@components/FlightCard'
 import type { FC } from 'react'
 import { useAppSelector } from '../store/hooks'
-import { races } from '../races'
+import { selectFavoriteFlights, selectFlights } from '@store/slices/flightSlice'
 
 const Favorites: FC = () => {
-  const favoritesIds = useAppSelector(
-    (state) => state.favorites.favoriteFlights,
-  )
+  const favoritesIds = useAppSelector(selectFavoriteFlights)
+  const races = useAppSelector(selectFlights)
 
   const favorites = races.filter((race) => favoritesIds.includes(race.airline))
+
   return (
     <div className="flex min-h-screen flex-col items-center">
       <h1 className="mt-4 text-2xl text-white">Ваши избранные рейсы</h1>
