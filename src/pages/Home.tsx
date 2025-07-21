@@ -1,18 +1,23 @@
 import FlightCard from '@components/FlightCard'
 import FlightDetails from '@components/FlightDetails'
+import { MapComponent } from '@components/Map'
 import Filter from '@components/ui/Filter'
 import { Modal } from '@components/ui/Modal'
 import { QUERY_PARAM_FLIGHT } from '@constants/flight.constants'
 import { AnimatePresence } from 'framer-motion'
-import { useEffect, useState, type FC } from 'react'
+import { useState, type FC } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { races } from '../races'
+import { useAppSelector, useAppDispatch } from '../store/hooks'
+import { toggleFavorite } from '../store/slices/favoritesSlice'
 
 const Home: FC = () => {
+  const favorites = useAppSelector(state => state.favorites.favoriteFlights)
+  const dispatch = useAppDispatch()
+
   const [isShowDetails, setIsShowDetails] = useState(false)
-  const [favorites, setFavorites] = useState<string[]>([])
   const [filter, setFilter] = useState('')
   const [searchParams, setSearchParams] = useSearchParams()
   const isMobile = useMediaQuery({ query: '(max-width: 992px)' })
@@ -32,44 +37,18 @@ const Home: FC = () => {
     setSearchParams(searchParams)
   }
 
-  useEffect(() => {
-    const store = localStorage.getItem('favorites')
-    if (store) {
-      try {
-        const parsed = JSON.parse(store)
-        setFavorites(Array.isArray(parsed) ? parsed : [])
-      } catch (e) {
-        console.error('Cannot parsed local storage', e)
-        setFavorites([])
-      }
-    }
-  }, [])
-
   const toggleFavorites = (id: string) => {
-    setFavorites((prev) => {
-      const isAdding = !prev.includes(id)
-      const updated = prev.includes(id)
-        ? prev.filter((el) => el !== id)
-        : [...prev, id]
-      try {
-        localStorage.setItem('favorites', JSON.stringify(updated))
-        setTimeout(() => {
-          toast.success(
-            isAdding
-              ? 'Рейс успешно добавлен в избранное!'
-              : 'Рейс успешно удален из избранного!',
-            {
-              position: 'top-right',
-              autoClose: 2000,
-            },
-          )
-        }, 0)
-      } catch (e) {
-        console.error('Ошибка сохранения в local storage', e)
-      }
-
-      return updated
-    })
+    const isAlreadyFavorite = favorites.includes(id);
+    dispatch(toggleFavorite(id))
+    toast.success(
+      isAlreadyFavorite
+        ? 'Рейс успешно удален из избранного!'
+        : 'Рейс успешно добавлен в избранное!',
+      {
+        position: 'top-right',
+        autoClose: 2000,
+      },
+    )
   }
 
   const filteredRaces = races.filter((race) => {
@@ -81,6 +60,7 @@ const Home: FC = () => {
 
   return (
     <>
+      <MapComponent />
       <div className="flex items-start justify-between px-5 pt-5 md:justify-center">
         <div>
           <Filter value={filter} onChange={setFilter} />

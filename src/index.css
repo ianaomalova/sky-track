@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 @import 'tailwindcss';
+@import 'maplibre-gl/dist/maplibre-gl.css';
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 body {
@@ -7,11 +9,6 @@ body {
   font-weight: 400;
   font-style: normal;
   background-color: #111111;
-  /* background-image: url('background.png');
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: contain; */
-  padding: 0 20px;
 }
 
 @theme {
