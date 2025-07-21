@@ -1,7 +1,7 @@
 import FlightCard from '@components/FlightCard'
-import type { FC } from 'react'
-import { useAppSelector } from '../store/hooks'
 import { selectFavoriteFlights, selectFlights } from '@store/slices/flightSlice'
+import type { FC } from 'react'
+import { useAppSelector } from '../../store/hooks'
 
 const Favorites: FC = () => {
   const favoritesIds = useAppSelector(selectFavoriteFlights)

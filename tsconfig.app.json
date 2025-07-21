@@ -23,7 +23,8 @@
       "@ui/*": ["components/ui/*"],
       "@constants/*": ["constants/*"],
       "@config/*": ["config/*"],
-      "@store/*": ["store/*"]
+      "@store/*": ["store/*"],
+      "@hooks/*": ["hooks/*"]
     },
 
     /* Linting */
