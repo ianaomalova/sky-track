@@ -14,6 +14,7 @@ export default defineConfig({
       '@ui': path.resolve(__dirname, 'src/components/ui'),
       '@constants': path.resolve(__dirname, 'src/constants'),
       '@config': path.resolve(__dirname, 'src/config'),
+      '@store': path.resolve(__dirname, 'src/store'),
     },
   },
 })

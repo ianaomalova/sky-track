@@ -2,23 +2,21 @@ import GradientProgress from '@ui/GradientProgress'
 import { Heart } from 'lucide-react'
 import { type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
 import type { IFlight } from 'types/race.interface'
+import { toast } from 'react-toastify'
+import { toggleFavorite } from '@store/slices/favoritesSlice'
 
 interface CardProp {
   race: IFlight
   openDetails?: () => void
   updateQueryParam?: (value: string) => void
-  favorites?: string[]
-  toggleFavorite?: (id: string) => void
 }
 
-const FlightCard: FC<CardProp> = ({
-  race,
-  openDetails,
-  updateQueryParam,
-  favorites,
-  toggleFavorite,
-}) => {
+const FlightCard: FC<CardProp> = ({ race, openDetails, updateQueryParam }) => {
+  const favorites = useAppSelector((state) => state.favorites.favoriteFlights)
+  const dispatch = useAppDispatch()
+
   const [searchParams] = useSearchParams()
   const flight = searchParams.get('flight')
 
@@ -27,6 +25,20 @@ const FlightCard: FC<CardProp> = ({
       updateQueryParam(race.airline)
       openDetails()
     }
+  }
+
+  const toggleFavorites = (id: string) => {
+    const isAlreadyFavorite = favorites.includes(id)
+    dispatch(toggleFavorite(id))
+    toast.success(
+      isAlreadyFavorite
+        ? 'Рейс успешно удален из избранного!'
+        : 'Рейс успешно добавлен в избранное!',
+      {
+        position: 'top-right',
+        autoClose: 2000,
+      },
+    )
   }
 
   const isFavorite = favorites?.includes(race.airline)
@@ -62,7 +74,7 @@ const FlightCard: FC<CardProp> = ({
               fill={isFavorite ? 'currentColor' : 'none'}
               onClick={(e) => {
                 e.stopPropagation()
-                toggleFavorite?.(race.airline)
+                toggleFavorites(race.airline)
               }}
             />
           </div>

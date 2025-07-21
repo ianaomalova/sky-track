@@ -22,7 +22,8 @@
       "@pages/*": ["pages/*"],
       "@ui/*": ["components/ui/*"],
       "@constants/*": ["constants/*"],
-      "@config/*": ["config/*"]
+      "@config/*": ["config/*"],
+      "@store/*": ["store/*"]
     },
 
     /* Linting */

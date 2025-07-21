@@ -6,11 +6,6 @@ interface FavoritesState {
   favoriteFlights: string[]
 }
 
-// @ts-ignore
-const initialState: FavoritesState = {
-  favoriteFlights: [],
-}
-
 const loadFavoritesFromStorage = (): string[] => {
   try {
     const storedFavorites = localStorage.getItem('favorites')
@@ -33,13 +28,13 @@ const favoritesSlice = createSlice({
     toggleFavorite: (state, action: PayloadAction<string>) => {
       const flightId = action.payload
       const index = state.favoriteFlights.indexOf(flightId)
-      
+
       if (index === -1) {
         state.favoriteFlights.push(flightId)
       } else {
         state.favoriteFlights.splice(index, 1)
       }
-      
+
       try {
         localStorage.setItem('favorites', JSON.stringify(state.favoriteFlights))
       } catch (e) {
@@ -51,6 +46,7 @@ const favoritesSlice = createSlice({
 
 export const { toggleFavorite } = favoritesSlice.actions
 
-export const selectFavorites = (state: RootState) => state.favorites.favoriteFlights
+export const selectFavorites = (state: RootState) =>
+  state.favorites.favoriteFlights
 
 export default favoritesSlice.reducer

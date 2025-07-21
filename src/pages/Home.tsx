@@ -8,15 +8,9 @@ import { AnimatePresence } from 'framer-motion'
 import { useState, type FC } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { useSearchParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import { races } from '../races'
-import { useAppSelector, useAppDispatch } from '../store/hooks'
-import { toggleFavorite } from '../store/slices/favoritesSlice'
 
 const Home: FC = () => {
-  const favorites = useAppSelector(state => state.favorites.favoriteFlights)
-  const dispatch = useAppDispatch()
-
   const [isShowDetails, setIsShowDetails] = useState(false)
   const [filter, setFilter] = useState('')
   const [searchParams, setSearchParams] = useSearchParams()
@@ -35,20 +29,6 @@ const Home: FC = () => {
   function updateQueryParam(value: string) {
     searchParams.set(QUERY_PARAM_FLIGHT, value)
     setSearchParams(searchParams)
-  }
-
-  const toggleFavorites = (id: string) => {
-    const isAlreadyFavorite = favorites.includes(id);
-    dispatch(toggleFavorite(id))
-    toast.success(
-      isAlreadyFavorite
-        ? 'Рейс успешно удален из избранного!'
-        : 'Рейс успешно добавлен в избранное!',
-      {
-        position: 'top-right',
-        autoClose: 2000,
-      },
-    )
   }
 
   const filteredRaces = races.filter((race) => {
@@ -70,8 +50,6 @@ const Home: FC = () => {
               race={race}
               openDetails={openDetails}
               updateQueryParam={updateQueryParam}
-              toggleFavorite={toggleFavorites}
-              favorites={favorites}
             />
           ))}
         </div>
