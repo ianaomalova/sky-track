@@ -1,8 +1,8 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '../store'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import type { IFlight } from '../../types/race.interface'
+import type { RootState } from '../store'
 
 const loadFavoritesFromStorage = (): string[] => {
   try {
@@ -19,9 +19,22 @@ const loadFavoritesFromStorage = (): string[] => {
 
 export const fetchFlights = createAsyncThunk(
   'flights/fetchFlights',
-  async () => {
-    const response = await axios.get<IFlight[]>('http://localhost:3001/flights')
-    return response.data
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get<IFlight[]>(
+        'http://localhost:3001/flights',
+      )
+      if (response.status !== 200) {
+        return rejectWithValue(`Ошибка при загрузке. Статус ${response.status}`)
+      }
+
+      return response.data
+    } catch (e) {
+      if (e instanceof Error) {
+        return rejectWithValue(`Ошибка при загрузке. ${e.message}`)
+      }
+      return rejectWithValue(`Ошибка при загрузке. Неизвестная ошибка`)
+    }
   },
 )
 
@@ -72,7 +85,11 @@ const flightsSlice = createSlice({
       })
       .addCase(fetchFlights.rejected, (state, action) => {
         state.loading = false
-        state.error = action.error.message || 'Something went wrong'
+        if (typeof action.payload === 'string') {
+          state.error = action.payload
+        } else {
+          state.error = action.error?.message || 'Something went wrong'
+        }
       })
   },
 })
