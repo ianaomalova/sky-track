@@ -11,7 +11,7 @@ const base = 'border-gray-900 p-3 dark:border-gray-200'
 
 export const FlightSchedule: FC<Props> = ({ race }) => {
   return (
-    <>
+    <div className="relative z-10">
       <div className={twoCols}>
         <div className={`${flex} border-r-2 border-b-4 ${base}`}>
           <p className="text-gray-400">Scheduled</p>
@@ -32,6 +32,6 @@ export const FlightSchedule: FC<Props> = ({ race }) => {
           <p>{race?.schedule.arrival.actual}</p>
         </div>
       </div>
-    </>
+    </div>
   )
 }

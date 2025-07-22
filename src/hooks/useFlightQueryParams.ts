@@ -19,5 +19,11 @@ export const useFlightQueryParams = () => {
     setSearchParams(searchParams)
   }
 
-  return { isShowDetails, openDetails, closeDetails, updateQueryParam }
+  return {
+    searchParams,
+    isShowDetails,
+    openDetails,
+    closeDetails,
+    updateQueryParam,
+  }
 }

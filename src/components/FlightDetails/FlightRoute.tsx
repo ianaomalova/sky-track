@@ -11,7 +11,7 @@ const border = 'border-gray-900 dark:border-gray-200 border-b-4'
 const flex = 'flex items-center'
 export const FlightRoute: FC<Props> = ({ race }) => {
   return (
-    <>
+    <div>
       <div className="relative grid grid-cols-2">
         <div
           className={`absolute top-[30%] left-[46%] h-10 w-10 rounded-full bg-gray-900 dark:bg-gray-200`}
@@ -43,6 +43,6 @@ export const FlightRoute: FC<Props> = ({ race }) => {
           <div className="mt-3 text-gray-400">882 km • 59m</div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

@@ -21,7 +21,7 @@ const FlightDetails: FC<Props> = ({ closeDetails, isMobile }) => {
   if (isMobile) {
     return (
       race && (
-        <div className="w-100 overflow-hidden rounded-2xl bg-gray-900 text-white dark:bg-gray-200 dark:text-black">
+        <div className="relative z-10 w-100 overflow-hidden rounded-2xl bg-gray-900 text-white dark:bg-gray-200 dark:text-black">
           <Header closeDetails={closeDetails} race={race} />
           <div className="p-3">
             <div className="rounded-xl bg-gray-800 dark:bg-white">
@@ -52,7 +52,7 @@ const FlightDetails: FC<Props> = ({ closeDetails, isMobile }) => {
             exit={{ opacity: 0, x: '-100%' }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
           >
-            <div className="w-100 overflow-hidden rounded-2xl bg-gray-900 text-white dark:bg-gray-200 dark:text-black">
+            <div className="relative z-10 w-100 overflow-hidden rounded-2xl bg-gray-900 text-white dark:bg-gray-200 dark:text-black">
               {/* Header start */}
               <Header closeDetails={closeDetails} race={race} />
               {/* Header end */}

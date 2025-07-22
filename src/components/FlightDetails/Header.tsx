@@ -16,7 +16,7 @@ export const Header: FC<Props> = ({ closeDetails, race }) => {
 
   return (
     <div
-      className="flex h-70 flex-col items-center justify-between"
+      className="relative z-20 flex h-70 flex-col items-center justify-between"
       style={gradientStyle}
     >
       <div className="mt-5 flex h-20 w-90 items-center justify-between rounded-xl bg-gray-900 p-7 dark:bg-white">

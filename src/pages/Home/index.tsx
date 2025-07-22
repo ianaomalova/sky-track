@@ -1,9 +1,11 @@
 import SkeletonCard from '@components/FlightCard/SkeletonCard'
 import FlightDetails from '@components/FlightDetails'
 import FlightList from '@components/FlightList'
+import MapComponent from '@components/Map'
 import ErrorComponent from '@components/ui/Error'
 import Filter from '@components/ui/Filter'
 import { Modal } from '@components/ui/Modal'
+import { QUERY_PARAM_FLIGHT } from '@constants/flight.constants'
 import { useFetchFlights } from '@hooks/useFetchFlights'
 import { useFilteredFlights } from '@hooks/useFilteredFlights'
 import { useFlightFilter } from '@hooks/useFlightFilter'
@@ -25,12 +27,18 @@ const Home: FC = () => {
   const isLoading = useAppSelector(selectFlightsLoading)
   const error = useAppSelector(selectFlightsError)
 
-  const { isShowDetails, openDetails, closeDetails, updateQueryParam } =
-    useFlightQueryParams()
+  const {
+    searchParams,
+    isShowDetails,
+    openDetails,
+    closeDetails,
+    updateQueryParam,
+  } = useFlightQueryParams()
 
   const { filter, setFilter } = useFlightFilter()
   const filteredRaces = useFilteredFlights(races, filter)
   const isMobile = useIsMobile()
+  const flightCode = searchParams.get(QUERY_PARAM_FLIGHT)
 
   useFetchFlights()
 
@@ -39,8 +47,12 @@ const Home: FC = () => {
       <ErrorComponent error={error} onRetry={() => dispatch(fetchFlights())} />
     )
   }
+
   return (
     <>
+      <div className="fixed inset-0 z-0">
+        <MapComponent races={races} selectedCodeRace={flightCode} />
+      </div>
       {isLoading ? (
         <div className="pt-5">
           {Array.from({ length: 5 }).map((_, index) => (

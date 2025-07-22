@@ -7,7 +7,7 @@ import MobileNavigation from './MobileNavigation'
 import Navigation from './Navigation'
 
 const header =
-  'mx-auto mt-5 max-w-250 rounded-2xl bg-gradient-to-r from-gray-900 via-sky-800 to-gray-900 dark:from-blue-100 dark:via-sky-200 dark:to-blue-100 sm:p-5 py-2 px-3 shadow-xl opacity-90'
+  'relative z-10 mx-auto mt-5 max-w-250 rounded-2xl bg-gradient-to-r from-gray-900 via-sky-800 to-gray-900 dark:from-blue-100 dark:via-sky-200 dark:to-blue-100 sm:p-5 py-2 px-3 shadow-xl opacity-90'
 export const Header: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)

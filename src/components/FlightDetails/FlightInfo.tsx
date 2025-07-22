@@ -16,7 +16,7 @@ const twoCols = 'grid grid-cols-2'
 
 export const FlightInfo: FC<Props> = ({ race }) => {
   return (
-    <div className="mt-3 rounded-xl bg-gray-800 dark:bg-white">
+    <div className="relative z-10 mt-3 rounded-xl bg-gray-800 dark:bg-white">
       <div className={infoHeader}>Flight information</div>
 
       <div className={twoCols}>
