@@ -1,4 +1,5 @@
 import * as turf from '@turf/turf'
+import type { LatLngExpression } from 'leaflet'
 
 export function splitRoute(
   points: [number, number][],
