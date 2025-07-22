@@ -30,3 +30,9 @@ export const getActivePlaneIcon = (theme: string) =>
     iconSize: [26, 26],
     iconAnchor: [13, 13],
   })
+
+export const redMarkerIcon = new L.Icon({
+  iconUrl: '/public/placeholder.png',
+  iconSize: [24, 24],
+  iconAnchor: [12, 22],
+})

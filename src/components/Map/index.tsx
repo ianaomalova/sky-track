@@ -1,3 +1,12 @@
+import {
+  DEFAULT_CENTER,
+  ZOOM_LEVEL,
+  darkMap,
+  getActivePlaneIcon,
+  getPlaneIcon,
+  lightMap,
+  redMarkerIcon,
+} from '@constants/map.constants'
 import { splitRoute } from '@utils/coords'
 import type { LatLngExpression } from 'leaflet'
 import type { FC } from 'react'
@@ -12,14 +21,6 @@ import {
 } from 'react-leaflet'
 import type { IFlight } from 'types/race.interface'
 import { useTheme } from '../../context/ThemeContext'
-import {
-  DEFAULT_CENTER,
-  ZOOM_LEVEL,
-  lightMap,
-  darkMap,
-  getPlaneIcon,
-  getActivePlaneIcon,
-} from '@constants/map.constants'
 
 interface Prop {
   races: IFlight[]
@@ -100,6 +101,13 @@ const MapComponent: FC<Prop> = ({ races, selectedCodeRace, progress }) => {
               dashArray: '6 6',
             }}
           />
+          <Marker position={selectedRace.from.coords} icon={redMarkerIcon}>
+            <Popup>Start: {selectedRace.from.city}</Popup>
+          </Marker>
+
+          <Marker position={selectedRace.to.coords} icon={redMarkerIcon}>
+            <Popup>End: {selectedRace.to.city}</Popup>
+          </Marker>
           {currentPosition && (
             <Marker position={currentPosition} icon={getActivePlaneIcon(theme)}>
               <Popup>
