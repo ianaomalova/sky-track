@@ -24,7 +24,8 @@
       "@constants/*": ["constants/*"],
       "@config/*": ["config/*"],
       "@store/*": ["store/*"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@utils/*": ["utils/*"]
     },
 
     /* Linting */

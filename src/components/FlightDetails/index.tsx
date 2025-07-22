@@ -21,7 +21,7 @@ const FlightDetails: FC<Props> = ({ closeDetails, isMobile }) => {
   if (isMobile) {
     return (
       race && (
-        <div className="relative z-10 w-100 overflow-hidden rounded-2xl bg-gray-900 text-white dark:bg-gray-200 dark:text-black">
+        <div className="fixed z-10 w-100 overflow-hidden rounded-2xl bg-gray-900 text-white dark:bg-gray-200 dark:text-black">
           <Header closeDetails={closeDetails} race={race} />
           <div className="p-3">
             <div className="rounded-xl bg-gray-800 dark:bg-white">
