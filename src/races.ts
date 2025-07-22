@@ -12,6 +12,7 @@ export const races: IFlight[] = [
       countryCode: 'BG',
       timezone: 'UTC+3',
       code: 'SOF',
+      coords: [42.6977, 23.3219],
     },
     to: {
       city: 'Beijing',
@@ -19,6 +20,7 @@ export const races: IFlight[] = [
       countryCode: 'CN',
       timezone: 'UTC+8',
       code: 'PEK',
+      coords: [39.9042, 116.4074],
     },
     airplane: {
       image: '/planes/turkish.png',
@@ -57,6 +59,7 @@ export const races: IFlight[] = [
       countryCode: 'IE',
       timezone: 'UTC+1',
       code: 'DUB',
+      coords: [53.3498, -6.2603],
     },
     to: {
       city: 'Larnaca',
@@ -64,6 +67,7 @@ export const races: IFlight[] = [
       countryCode: 'CY',
       timezone: 'UTC+3',
       code: 'LCA',
+      coords: [34.9167, 33.6233],
     },
     airplane: {
       image: '/planes/ryanair.png',
@@ -102,6 +106,7 @@ export const races: IFlight[] = [
       countryCode: 'FR',
       timezone: 'UTC+2',
       code: 'NCE',
+      coords: [43.7102, 7.262],
     },
     to: {
       city: 'Tbilisi',
@@ -109,6 +114,7 @@ export const races: IFlight[] = [
       countryCode: 'GE',
       timezone: 'UTC+4',
       code: 'TBS',
+      coords: [41.7151, 44.8271],
     },
     airplane: {
       image: '/planes/s7.png',
@@ -147,6 +153,7 @@ export const races: IFlight[] = [
       countryCode: 'PT',
       timezone: 'UTC+1',
       code: 'OPO',
+      coords: [41.1579, -8.6291],
     },
     to: {
       city: 'Baku',
@@ -154,6 +161,7 @@ export const races: IFlight[] = [
       countryCode: 'AZ',
       timezone: 'UTC+4',
       code: 'GYD',
+      coords: [40.4093, 49.8671],
     },
     airplane: {
       image: '/planes/swiss.png',
@@ -192,6 +200,7 @@ export const races: IFlight[] = [
       countryCode: 'BG',
       timezone: 'UTC+3',
       code: 'BOJ',
+      coords: [42.5048, 27.4716],
     },
     to: {
       city: 'Muscat',
@@ -199,6 +208,7 @@ export const races: IFlight[] = [
       countryCode: 'OM',
       timezone: 'UTC+4',
       code: 'MCT',
+      coords: [23.588, 58.3829],
     },
     airplane: {
       image: '/planes/lufthansa.png',
