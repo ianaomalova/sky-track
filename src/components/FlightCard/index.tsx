@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { toggleFavorite } from '@store/slices/flightSlice'
+import { toggleFavorite } from '@store/slices/flights/flights.slice'
 import type { IFlight } from '@shared_types/race.interface'
 import GradientProgress from '@ui/GradientProgress'
 import { Heart } from 'lucide-react'

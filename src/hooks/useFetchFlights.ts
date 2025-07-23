@@ -1,5 +1,5 @@
 import { useAppDispatch } from '@store/hooks'
-import { fetchFlights } from '@store/slices/flightSlice'
+import { fetchFlights } from '@store/slices/flights/flights.thunks'
 import { useEffect } from 'react'
 
 export const useFetchFlights = () => {

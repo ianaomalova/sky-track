@@ -19,6 +19,7 @@
     "paths": {
       "@components/*": ["components/*"],
       "@services/*": ["services/*"],
+      "@api/*": ["api/*"],
       "@pages/*": ["pages/*"],
       "@ui/*": ["components/ui/*"],
       "@constants/*": ["constants/*"],

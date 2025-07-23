@@ -1,5 +1,5 @@
 import FlightCard from '@components/FlightCard'
-import { selectFavoriteFlights, selectFlights } from '@store/slices/flightSlice'
+import { selectFavoriteFlights, selectFlights } from '@store/slices/flights/flights.selectors'
 import type { FC } from 'react'
 import { useAppSelector } from '../../store/hooks'
 
