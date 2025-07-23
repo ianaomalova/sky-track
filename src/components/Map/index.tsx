@@ -7,6 +7,7 @@ import {
   lightMap,
   redMarkerIcon,
 } from '@constants/map.constants'
+import type { IFlight } from '@shared_types/race.interface'
 import { splitRoute } from '@utils/coords'
 import type { LatLngExpression } from 'leaflet'
 import type { FC } from 'react'
@@ -19,7 +20,6 @@ import {
   TileLayer,
   useMap,
 } from 'react-leaflet'
-import type { IFlight } from 'types/race.interface'
 import { useTheme } from '../../context/ThemeContext'
 
 interface Prop {

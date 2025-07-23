@@ -1,6 +1,6 @@
+import type { IFlight } from '@shared_types/race.interface'
 import { X } from 'lucide-react'
 import type { FC } from 'react'
-import type { IFlight } from 'types/race.interface'
 
 interface Props {
   closeDetails: () => void

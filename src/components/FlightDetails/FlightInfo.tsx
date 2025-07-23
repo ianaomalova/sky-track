@@ -1,5 +1,5 @@
+import type { IFlight } from '@shared_types/race.interface'
 import type { FC } from 'react'
-import type { IFlight } from 'types/race.interface'
 
 interface Props {
   race: IFlight

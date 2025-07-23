@@ -19,7 +19,8 @@ import {
   selectFlightsLoading,
 } from '@store/slices/flightSlice'
 import { AnimatePresence } from 'framer-motion'
-import { type FC } from 'react'
+import { useState, type FC } from 'react'
+import Select from 'react-select'
 
 const Home: FC = () => {
   const dispatch = useAppDispatch()
@@ -36,6 +37,10 @@ const Home: FC = () => {
   } = useFlightQueryParams()
 
   const { filter, setFilter } = useFlightFilter()
+  const [selectedAirline, setSelectedAirline] = useState<null | {
+    value: string
+    label: string
+  }>(null)
   const filteredRaces = useFilteredFlights(races, filter)
   const isMobile = useIsMobile()
   const flightCode = searchParams.get(QUERY_PARAM_FLIGHT)

@@ -25,7 +25,8 @@
       "@config/*": ["config/*"],
       "@store/*": ["store/*"],
       "@hooks/*": ["hooks/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@shared_types/*": ["types/*"]
     },
 
     /* Linting */

@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
-import type { IFlight } from '../../types/race.interface'
+import type { IFlight } from '@shared_types/race.interface'
 import type { RootState } from '../store'
 
 const loadFavoritesFromStorage = (): string[] => {

@@ -1,7 +1,7 @@
+import GradientProgress from '@components/ui/GradientProgress'
+import type { IFlight } from '@shared_types/race.interface'
 import { Plane } from 'lucide-react'
 import type { FC } from 'react'
-import GradientProgress from '@components/ui/GradientProgress'
-import type { IFlight } from 'types/race.interface'
 
 interface Props {
   race: IFlight

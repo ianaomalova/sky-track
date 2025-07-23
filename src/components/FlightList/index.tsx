@@ -1,6 +1,6 @@
-import type { FC } from 'react'
-import type { IFlight } from '../../types/race.interface'
 import FlightCard from '@components/FlightCard'
+import type { FC } from 'react'
+import type { IFlight } from '@shared_types/race.interface'
 
 interface FlightListProps {
   races: IFlight[]

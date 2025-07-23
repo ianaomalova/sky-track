@@ -1,4 +1,4 @@
-import type { IFlight } from './types/race.interface'
+import type { IFlight } from '@shared_types/race.interface'
 
 export const races: IFlight[] = [
   {

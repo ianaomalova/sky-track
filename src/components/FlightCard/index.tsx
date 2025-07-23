@@ -1,11 +1,11 @@
+import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { toggleFavorite } from '@store/slices/flightSlice'
+import type { IFlight } from '@shared_types/race.interface'
 import GradientProgress from '@ui/GradientProgress'
 import { Heart } from 'lucide-react'
 import { type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '@store/hooks'
-import type { IFlight } from 'types/race.interface'
 import { toast } from 'react-toastify'
-import { toggleFavorite } from '@store/slices/flightSlice'
 
 interface CardProp {
   race: IFlight
