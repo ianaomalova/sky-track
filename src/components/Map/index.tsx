@@ -1,26 +1,19 @@
 import {
-  DEFAULT_CENTER,
   ZOOM_LEVEL,
   darkMap,
-  getActivePlaneIcon,
   getPlaneIcon,
   lightMap,
-  redMarkerIcon,
 } from '@constants/map.constants'
 import type { IFlight } from '@shared_types/race.interface'
-import { splitRoute } from '@utils/coords'
 import type { LatLngExpression } from 'leaflet'
 import type { FC } from 'react'
-import { useEffect, useMemo, useState } from 'react'
-import {
-  MapContainer,
-  Marker,
-  Polyline,
-  Popup,
-  TileLayer,
-  useMap,
-} from 'react-leaflet'
+import { useEffect, useState } from 'react'
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import { useTheme } from '../../context/ThemeContext'
+import Error from './Error'
+import Loading from './Loading'
+import SelectedRace from './SelectedRace'
+import { useMapLogic } from './useMapLogic'
 
 interface Prop {
   races: IFlight[]
@@ -28,29 +21,23 @@ interface Prop {
   progress?: number
 }
 
-const MapComponent: FC<Prop> = ({ races, selectedCodeRace, progress }) => {
+const MapComponentContainer: FC<Prop> = ({
+  races,
+  selectedCodeRace,
+  progress,
+}) => {
   const { theme } = useTheme()
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
-  const selectedRace = races.find((race) => race.airline === selectedCodeRace)
-  const center: LatLngExpression = selectedRace?.from.coords ?? DEFAULT_CENTER
-
-  const { passedPoints, remainingPoints, currentPosition } = useMemo(() => {
-    if (!selectedRace) {
-      return {
-        passedPoints: [],
-        remainingPoints: [],
-        currentPosition: null,
-      }
-    }
-
-    return splitRoute(
-      [selectedRace.from.coords, selectedRace.to.coords],
-      progress ? progress : 0.1,
-    )
-  }, [selectedRace])
+  const {
+    center,
+    selectedRace,
+    passedPoints,
+    remainingPoints,
+    currentPosition,
+  } = useMapLogic(races, selectedCodeRace, progress)
 
   const MapUpdater = ({
     center,
@@ -77,33 +64,12 @@ const MapComponent: FC<Prop> = ({ races, selectedCodeRace, progress }) => {
     setError(true)
   }
 
-  if (error) {
-    return (
-      <div className="mt-40 flex flex-col items-center justify-center text-white">
-        <div className="text-2xl">Ошибка загрузки карты</div>
-        <div className="text-xl">
-          Проверьте соединение или попробуйте позже.
-        </div>
-      </div>
-    )
-  }
+  if (error) return <Error />
 
   return (
     <>
       {loading ? (
-        <div
-          style={{
-            position: 'absolute',
-            top: 20,
-            left: 20,
-            zIndex: 1000,
-            background: 'rgba(255,255,255,0.9)',
-            padding: '1rem',
-            borderRadius: '8px',
-          }}
-        >
-          Загрузка карты...
-        </div>
+        <Loading />
       ) : (
         <MapContainer
           center={center}
@@ -135,38 +101,13 @@ const MapComponent: FC<Prop> = ({ races, selectedCodeRace, progress }) => {
           )}
 
           {selectedRace && (
-            <>
-              <Polyline
-                positions={passedPoints}
-                pathOptions={{ color: 'deepskyblue', weight: 3 }}
-              />
-
-              <Polyline
-                positions={remainingPoints}
-                pathOptions={{
-                  color: 'gray',
-                  weight: 2,
-                  dashArray: '6 6',
-                }}
-              />
-              <Marker position={selectedRace.from.coords} icon={redMarkerIcon}>
-                <Popup>Start: {selectedRace.from.city}</Popup>
-              </Marker>
-
-              <Marker position={selectedRace.to.coords} icon={redMarkerIcon}>
-                <Popup>End: {selectedRace.to.city}</Popup>
-              </Marker>
-              {currentPosition && (
-                <Marker
-                  position={currentPosition}
-                  icon={getActivePlaneIcon(theme)}
-                >
-                  <Popup>
-                    {selectedRace.airline} from {selectedRace.from.city}
-                  </Popup>
-                </Marker>
-              )}
-            </>
+            <SelectedRace
+              passedPoints={passedPoints}
+              remainingPoints={remainingPoints}
+              currentPosition={currentPosition}
+              selectedRace={selectedRace}
+              theme={theme}
+            />
           )}
 
           <MapUpdater center={center} zoom={ZOOM_LEVEL} />
@@ -176,4 +117,4 @@ const MapComponent: FC<Prop> = ({ races, selectedCodeRace, progress }) => {
   )
 }
 
-export default MapComponent
+export default MapComponentContainer

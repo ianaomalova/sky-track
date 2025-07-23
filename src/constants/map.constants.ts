@@ -18,7 +18,7 @@ export const darkMap = {
 export const getPlaneIcon = (theme: string) =>
   L.icon({
     iconUrl:
-      theme === 'dark' ? '/public/gray-plane.svg' : '/public/color-plane.svg',
+      theme === 'dark' ? '/gray-plane.svg' : '/color-plane.svg',
     iconSize: [32, 32],
     iconAnchor: [16, 16],
   })
@@ -26,13 +26,13 @@ export const getPlaneIcon = (theme: string) =>
 export const getActivePlaneIcon = (theme: string) =>
   L.icon({
     iconUrl:
-      theme === 'dark' ? '/public/plane-marker.svg' : '/public/blue-plane.svg',
+      theme === 'dark' ? '/plane-marker.svg' : '/blue-plane.svg',
     iconSize: [26, 26],
     iconAnchor: [13, 13],
   })
 
 export const redMarkerIcon = new L.Icon({
-  iconUrl: '/public/placeholder.png',
+  iconUrl: '/placeholder.png',
   iconSize: [24, 24],
   iconAnchor: [12, 22],
 })
