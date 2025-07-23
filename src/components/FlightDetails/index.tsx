@@ -1,12 +1,14 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { races } from '../../races'
 import { Actions } from './Actions'
 import { FlightInfo } from './FlightInfo'
 import { FlightRoute } from './FlightRoute'
 import { FlightSchedule } from './FlightSchedule'
 import { Header } from './Header'
+import { QUERY_PARAM_FLIGHT } from '@constants/flight.constants'
+import { useAppSelector } from '@store/hooks'
+import { selectFlights } from '@store/slices/flights/flights.selectors'
 
 interface Props {
   closeDetails: () => void
@@ -14,8 +16,9 @@ interface Props {
 }
 
 const FlightDetails: FC<Props> = ({ closeDetails, isMobile }) => {
+  const races = useAppSelector(selectFlights)
   const [searchParams] = useSearchParams()
-  const flight = searchParams.get('flight')
+  const flight = searchParams.get(QUERY_PARAM_FLIGHT)
   const race = races.find((item) => item.airline === flight)
 
   if (isMobile) {

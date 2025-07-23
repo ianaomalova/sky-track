@@ -6,6 +6,7 @@ import { Heart } from 'lucide-react'
 import { type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { QUERY_PARAM_FLIGHT } from '@constants/flight.constants'
 
 interface CardProp {
   race: IFlight
@@ -18,7 +19,7 @@ const FlightCard: FC<CardProp> = ({ race, openDetails, updateQueryParam }) => {
   const dispatch = useAppDispatch()
 
   const [searchParams] = useSearchParams()
-  const flight = searchParams.get('flight')
+  const flight = searchParams.get(QUERY_PARAM_FLIGHT)
 
   function clickCard() {
     if (openDetails && updateQueryParam) {
