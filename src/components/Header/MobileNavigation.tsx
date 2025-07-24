@@ -1,7 +1,7 @@
+import ThemeToggle from '@components/ui/ThemeToggle'
 import { NAV_CONFIG } from '@config/nav.config'
 import type { FC } from 'react'
 import { NavLink } from 'react-router-dom'
-import Actions from './Actions'
 
 interface Prop {
   setIsMenuOpen: (a: boolean) => void
@@ -29,7 +29,7 @@ const MobileNavigation: FC<Prop> = ({ setIsMenuOpen }) => {
       </nav>
 
       <div className="mt-4 flex items-center justify-center gap-3 border-t border-white/20 pt-4 dark:border-gray-400/30">
-        <Actions setIsMenuOpen={setIsMenuOpen} />
+        <ThemeToggle />
       </div>
     </div>
   )

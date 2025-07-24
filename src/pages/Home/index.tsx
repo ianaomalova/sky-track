@@ -17,7 +17,7 @@ import {
   selectFlightsError,
   selectFlightsLoading,
 } from '@store/slices/flights/flights.selectors'
-import {fetchFlights} from '@store/slices/flights/flights.thunks'
+import { fetchFlights } from '@store/slices/flights/flights.thunks'
 import { AnimatePresence } from 'framer-motion'
 import { useState, type FC } from 'react'
 import Select from 'react-select'
@@ -37,10 +37,6 @@ const Home: FC = () => {
   } = useFlightQueryParams()
 
   const { filter, setFilter } = useFlightFilter()
-  const [selectedAirline, setSelectedAirline] = useState<null | {
-    value: string
-    label: string
-  }>(null)
   const filteredRaces = useFilteredFlights(races, filter)
   const isMobile = useIsMobile()
   const flightCode = searchParams.get(QUERY_PARAM_FLIGHT)
@@ -66,7 +62,7 @@ const Home: FC = () => {
         </div>
       ) : (
         <div className="flex items-start justify-between px-5 pt-5 md:justify-center">
-          <div>
+          <div className="h-180 overflow-scroll">
             <Filter value={filter} onChange={setFilter} />
             <FlightList
               races={filteredRaces}
@@ -83,7 +79,9 @@ const Home: FC = () => {
                     <FlightDetails closeDetails={closeDetails} isMobile />
                   </Modal>
                 ) : (
-                  <FlightDetails closeDetails={closeDetails} />
+                  <div className="h-180 overflow-scroll">
+                    <FlightDetails closeDetails={closeDetails} />
+                  </div>
                 )}
               </>
             )}
