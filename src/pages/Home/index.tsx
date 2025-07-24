@@ -19,7 +19,7 @@ import {
 } from '@store/slices/flights/flights.selectors'
 import { fetchFlights } from '@store/slices/flights/flights.thunks'
 import { AnimatePresence } from 'framer-motion'
-import { useState, type FC } from 'react'
+import { type FC } from 'react'
 import Select from 'react-select'
 
 const Home: FC = () => {
