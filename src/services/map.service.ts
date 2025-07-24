@@ -1,5 +1,4 @@
 import * as turf from '@turf/turf'
-import type { LineString, Feature } from 'geojson'
 
 export const MapService = {
   splitRoute: (

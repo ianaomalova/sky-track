@@ -24,7 +24,7 @@ interface Prop {
 const MapComponentContainer: FC<Prop> = ({
   races,
   selectedCodeRace,
-  progress,
+  progress = 0.4,
 }) => {
   const { theme } = useTheme()
 

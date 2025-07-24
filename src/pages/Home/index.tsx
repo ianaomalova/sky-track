@@ -20,7 +20,6 @@ import {
 import { fetchFlights } from '@store/slices/flights/flights.thunks'
 import { AnimatePresence } from 'framer-motion'
 import { type FC } from 'react'
-import Select from 'react-select'
 
 const Home: FC = () => {
   const dispatch = useAppDispatch()
@@ -62,13 +61,15 @@ const Home: FC = () => {
         </div>
       ) : (
         <div className="flex items-start justify-between px-5 pt-5 md:justify-center">
-          <div className="h-180 overflow-scroll">
+          <div>
             <Filter value={filter} onChange={setFilter} />
-            <FlightList
-              races={filteredRaces}
-              openDetails={openDetails}
-              updateQueryParam={updateQueryParam}
-            />
+            <div className="h-165 overflow-scroll">
+              <FlightList
+                races={filteredRaces}
+                openDetails={openDetails}
+                updateQueryParam={updateQueryParam}
+              />
+            </div>
           </div>
 
           <AnimatePresence>
