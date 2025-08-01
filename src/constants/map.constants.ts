@@ -18,11 +18,11 @@ export const darkMap = {
 export const getPlaneIcon = (theme: string) =>
   L.icon({
     iconUrl: theme === 'dark' ? '/gray-plane.svg' : '/color-plane.svg',
-    iconSize: [32, 32],
-    iconAnchor: [16, 16],
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
   })
 
-export const getActivePlaneIcon = (theme: string) =>
+export const getActivePlaneIcon = () =>
   L.icon({
     iconUrl: '/public/circle.png',
     iconSize: [14, 14],

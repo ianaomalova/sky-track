@@ -16,7 +16,6 @@ const SelectedRace: FC<Prop> = ({
   remainingPoints,
   currentPosition,
   selectedRace,
-  theme,
 }) => {
   return (
     <>
@@ -41,7 +40,7 @@ const SelectedRace: FC<Prop> = ({
         <Popup>End: {selectedRace.to.city}</Popup>
       </Marker>
       {currentPosition && (
-        <Marker position={currentPosition} icon={getActivePlaneIcon(theme)}>
+        <Marker position={currentPosition} icon={getActivePlaneIcon()}>
           <Popup>
             {selectedRace.airline} from {selectedRace.from.city}
           </Popup>
